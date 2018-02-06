@@ -36,7 +36,6 @@ class OPNClient(object):
         response = requests.get(req_url, verify=self.verify_cert,
                                auth=(self.api_key, self.api_secret))
         if response.status_code == 200:
-            print response.text
             return json.loads(response.text)
         else:
             raise exceptions.APIException(status_code=response.status_code,
