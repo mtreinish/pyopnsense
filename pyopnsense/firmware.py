@@ -17,6 +17,7 @@
 
 from pyopnsense import client
 
+
 class FirmwareClient(client.OPNClient):
 
     def status(self):

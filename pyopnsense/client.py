@@ -34,7 +34,7 @@ class OPNClient(object):
     def _get(self, url):
         req_url = self.base_url + '/' + url
         response = requests.get(req_url, verify=self.verify_cert,
-                               auth=(self.api_key, self.api_secret))
+                                auth=(self.api_key, self.api_secret))
         if response.status_code == 200:
             return json.loads(response.text)
         else:
