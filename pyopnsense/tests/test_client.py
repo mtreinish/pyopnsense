@@ -28,7 +28,7 @@ from pyopnsense.tests import base
 class TestOPNClient(base.TestCase):
 
     @mock.patch('requests.get')
-    def test_success(self, request_mock):
+    def test_get_success(self, request_mock):
         response_mock = mock.MagicMock()
         response_mock.status_code = 200
         response_mock.text = json.dumps({'a': 'body'})
@@ -36,12 +36,111 @@ class TestOPNClient(base.TestCase):
         opnclient = client.OPNClient('', '', '')
         resp = opnclient._get('fake_url')
         self.assertEqual({'a': 'body'}, resp)
+        request_mock.assert_called_once_with('/fake_url', auth=('', ''),
+                                             verify=False)
 
     @mock.patch('requests.get')
-    def test_failures(self, request_mock):
+    def test_get_failures(self, request_mock):
         response_mock = mock.MagicMock()
         response_mock.status_code = 401
         response_mock.text = json.dumps({'a': 'body'})
         request_mock.return_value = response_mock
         opnclient = client.OPNClient('', '', '')
         self.assertRaises(exceptions.APIException, opnclient._get, 'fake_url')
+        request_mock.assert_called_once_with('/fake_url', auth=('', ''),
+                                             verify=False)
+
+    @mock.patch('requests.post')
+    def test_post_success(self, request_mock):
+        response_mock = mock.MagicMock()
+        response_mock.status_code = 200
+        response_mock.text = json.dumps({'a': 'body'})
+        request_mock.return_value = response_mock
+        opnclient = client.OPNClient('', '', '')
+        resp = opnclient._post('fake_url', 'body')
+        self.assertEqual({'a': 'body'}, resp)
+        request_mock.assert_called_once_with('/fake_url', data='body',
+                                             auth=('', ''), verify=False)
+
+    @mock.patch('requests.post')
+    def test_post_failures(self, request_mock):
+        response_mock = mock.MagicMock()
+        response_mock.status_code = 401
+        response_mock.text = json.dumps({'a': 'body'})
+        request_mock.return_value = response_mock
+        opnclient = client.OPNClient('', '', '')
+        self.assertRaises(exceptions.APIException, opnclient._post, 'fake_url',
+                          'body')
+        request_mock.assert_called_once_with('/fake_url', data='body',
+                                             auth=('', ''), verify=False)
+
+    @mock.patch('requests.head')
+    def test_head_success(self, request_mock):
+        response_mock = mock.MagicMock()
+        response_mock.status_code = 200
+        response_mock.text = json.dumps({'a': 'body'})
+        request_mock.return_value = response_mock
+        opnclient = client.OPNClient('', '', '')
+        resp = opnclient._head('fake_url')
+        self.assertEqual({'a': 'body'}, resp)
+        request_mock.assert_called_once_with('/fake_url', auth=('', ''),
+                                             verify=False)
+
+    @mock.patch('requests.head')
+    def test_head_failures(self, request_mock):
+        response_mock = mock.MagicMock()
+        response_mock.status_code = 401
+        response_mock.text = json.dumps({'a': 'body'})
+        request_mock.return_value = response_mock
+        opnclient = client.OPNClient('', '', '')
+        self.assertRaises(exceptions.APIException, opnclient._head, 'fake_url')
+        request_mock.assert_called_once_with('/fake_url', auth=('', ''),
+                                             verify=False)
+
+    @mock.patch('requests.put')
+    def test_put_success(self, request_mock):
+        response_mock = mock.MagicMock()
+        response_mock.status_code = 200
+        response_mock.text = json.dumps({'a': 'body'})
+        request_mock.return_value = response_mock
+        opnclient = client.OPNClient('', '', '')
+        resp = opnclient._put('fake_url', 'body')
+        self.assertEqual({'a': 'body'}, resp)
+        request_mock.assert_called_once_with('/fake_url', data='body',
+                                             auth=('', ''), verify=False)
+
+    @mock.patch('requests.put')
+    def test_put_failures(self, request_mock):
+        response_mock = mock.MagicMock()
+        response_mock.status_code = 401
+        response_mock.text = json.dumps({'a': 'body'})
+        request_mock.return_value = response_mock
+        opnclient = client.OPNClient('', '', '')
+        self.assertRaises(exceptions.APIException, opnclient._put, 'fake_url',
+                          'body')
+        request_mock.assert_called_once_with('/fake_url', data='body',
+                                             auth=('', ''), verify=False)
+
+    @mock.patch('requests.patch')
+    def test_patch_success(self, request_mock):
+        response_mock = mock.MagicMock()
+        response_mock.status_code = 200
+        response_mock.text = json.dumps({'a': 'body'})
+        request_mock.return_value = response_mock
+        opnclient = client.OPNClient('', '', '')
+        resp = opnclient._patch('fake_url', 'body')
+        self.assertEqual({'a': 'body'}, resp)
+        request_mock.assert_called_once_with('/fake_url', data='body',
+                                             auth=('', ''), verify=False)
+
+    @mock.patch('requests.patch')
+    def test_patch_failures(self, request_mock):
+        response_mock = mock.MagicMock()
+        response_mock.status_code = 401
+        response_mock.text = json.dumps({'a': 'body'})
+        request_mock.return_value = response_mock
+        opnclient = client.OPNClient('', '', '')
+        self.assertRaises(exceptions.APIException, opnclient._patch,
+                          'fake_url', 'body')
+        request_mock.assert_called_once_with('/fake_url', data='body',
+                                             auth=('', ''), verify=False)
