@@ -144,3 +144,26 @@ class TestOPNClient(base.TestCase):
                           'fake_url', 'body')
         request_mock.assert_called_once_with('/fake_url', data='body',
                                              auth=('', ''), verify=False)
+
+    @mock.patch('requests.delete')
+    def test_delete_success(self, request_mock):
+        response_mock = mock.MagicMock()
+        response_mock.status_code = 204
+        response_mock.text = json.dumps({'a': 'body'})
+        request_mock.return_value = response_mock
+        opnclient = client.OPNClient('', '', '')
+        opnclient._delete('fake_url')
+        request_mock.assert_called_once_with('/fake_url',
+                                             auth=('', ''), verify=False)
+
+    @mock.patch('requests.delete')
+    def test_delete_failures(self, request_mock):
+        response_mock = mock.MagicMock()
+        response_mock.status_code = 401
+        response_mock.text = json.dumps({'a': 'body'})
+        request_mock.return_value = response_mock
+        opnclient = client.OPNClient('', '', '')
+        self.assertRaises(exceptions.APIException, opnclient._delete,
+                          'fake_url')
+        request_mock.assert_called_once_with('/fake_url',
+                                             auth=('', ''), verify=False)
