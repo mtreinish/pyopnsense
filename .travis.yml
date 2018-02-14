@@ -12,12 +12,15 @@ matrix:
       env: TOXENV=pep8
     - python: "3.6"
       env: TOXENV=docs
+    - python: "3.6"
+      env: TOXENV=cover
 cache:
   directories:
     - $HOME/.cache/pip
-install: pip install -U tox
+install: pip install -U tox coveralls
 language: python
 script:
   - tox
+after_success: .travis/coveralls.sh
 notifications:
   email: false
