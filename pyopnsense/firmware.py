@@ -19,6 +19,18 @@ from pyopnsense import client
 
 
 class FirmwareClient(client.OPNClient):
+    """A client for interacting with the core/firmware endpoint
+
+    :param str api_key: The api key to use for requests
+    :param str api_secret: The api secret to use for requests
+    :param str base_url: THe base api endpoint for the OPNsense deployment
+    """
 
     def status(self):
+        """Return the current firmware update status
+
+        :returns: A dict representing the current upgrade status for the
+                  OPNsense firmware.
+        :rtype: dict
+        """
         return self._get('core/firmware/status')
