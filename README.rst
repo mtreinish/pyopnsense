@@ -1,6 +1,8 @@
 ==========
 pyopnsense
 ==========
+You can see the full rendered docs at: http://pyopnsense.readthedocs.io/en/latest/
+
 A python API client for the OPNsense API. This provides a python interface for
 interacting with the OPNsense API.
 
@@ -19,6 +21,8 @@ with::
 
 which will install pyopnsense in your python environment in editable mode for
 development.
+
+.. _usage:
 
 Usage
 =====
