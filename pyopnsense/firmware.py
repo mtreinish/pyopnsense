@@ -15,6 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with pyopnsense. If not, see <http://www.gnu.org/licenses/>.
 
+import json
+
 from pyopnsense import client
 
 
@@ -34,3 +36,14 @@ class FirmwareClient(client.OPNClient):
         :rtype: dict
         """
         return self._get('core/firmware/status')
+
+    def upgrade(self, upgrade_list=None):
+        """Issue an upgrade request
+
+        :param list upgrade_list: The list of packages to upgrade. If none are
+            specified it will issue a request to upgrade all pacakges.
+        """
+        if upgrade_list is None:
+            upgrade_list = 'all'
+        body = json.dumps({'upgrade': upgrade_list})
+        return self._post('core/firmware/upgrade', body)
