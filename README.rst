@@ -55,3 +55,8 @@ to access. The basic structure of the library is setup to roughly mirror the
 endpoint tree of the OPNsense API. Each client module maps to the base endpoint
 and then there is a client class in those modules for the next level up off
 that.
+
+You can find more detail on how to use the clients in the API reference
+documentation found here:
+
+http://pyopnsense.readthedocs.io/en/latest/api.html
