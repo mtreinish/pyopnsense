@@ -21,22 +21,44 @@ from pyopnsense import client
 
 
 class NetFlowClient(client.OPNClient):
+    """A client for interacting with the diagnostics/netflow endpoint
 
+    :param str api_key: The api key to use for requests
+    :param str api_secret: The api secret to use for requests
+    :param str base_url: THe base api endpoint for the OPNsense deployment
+    """
     def status(self):
+        """Return the current netflow status
+
+        :returns: A dict representing the current status of netflow
+        :rtype: dict
+        """
         return self._get('diagnostics/netflow/status')
 
 
 class InterfaceClient(client.OPNClient):
+    """A client for interacting with the diagnostics/interface endpoint
 
+    :param str api_key: The api key to use for requests
+    :param str api_secret: The api secret to use for requests
+    :param str base_url: THe base api endpoint for the OPNsense deployment
+    """
     def get_ndp(self):
+        """Get NDP table for router"""
         return self._get('diagnostics/interface/getNdp')
 
     def get_arp(self):
+        """Get ARP table for router"""
         return self._get('diagnostics/interface/getArp')
 
 
 class NetworkInsightClient(client.OPNClient):
+    """A client for interacting with the diagnostics/networkinsight endpoint
 
+    :param str api_key: The api key to use for requests
+    :param str api_secret: The api secret to use for requests
+    :param str base_url: THe base api endpoint for the OPNsense deployment
+    """
     def get_interfaces(self):
         return self._get('diagnostics/networkinsight/getinterfaces')
 
@@ -51,7 +73,12 @@ class NetworkInsightClient(client.OPNClient):
 
 
 class SystemHealthClient(client.OPNClient):
+    """A client for interacting with the diagnostics/systemhealth endpoint
 
+    :param str api_key: The api key to use for requests
+    :param str api_secret: The api secret to use for requests
+    :param str base_url: THe base api endpoint for the OPNsense deployment
+    """
     def get_health_list(self):
         return self._get('diagnostics/systemhealth/getRRDlist')
 

@@ -42,3 +42,9 @@ Firmware API
 .. automodule:: pyopnsense.firmware
     :members:
     :show-inheritance:
+
+Diagnostics API
+---------------
+.. automodule:: pyopnsense.diagnostics
+    :members:
+    :show-inheritance:
