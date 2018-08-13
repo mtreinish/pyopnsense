@@ -22,6 +22,8 @@ import requests
 
 from pyopnsense import exceptions
 
+DEFAULT_TIMEOUT = 5
+
 # All the successful HTTP status codes from RFC 7231 & 4918
 HTTP_SUCCESS = (200, 201, 202, 203, 204, 205, 206, 207)
 
@@ -38,41 +40,19 @@ class OPNClient(object):
         if response.status_code in HTTP_SUCCESS:
             return json.loads(response.text)
         else:
-            raise exceptions.APIException(status_code=response.status_code,
-                                          resp_body=response.text)
+            raise exceptions.APIException(
+                status_code=response.status_code, resp_body=response.text)
 
-    def _get(self, url):
-        req_url = self.base_url + '/' + url
+    def _get(self, endpoint):
+        req_url = '{}/{}'.format(self.base_url, endpoint)
         response = requests.get(req_url, verify=self.verify_cert,
-                                auth=(self.api_key, self.api_secret))
+                                auth=(self.api_key, self.api_secret),
+                                timeout=DEFAULT_TIMEOUT)
         return self._process_response(response)
 
-    def _head(self, url):
-        req_url = self.base_url + '/' + url
-        response = requests.head(req_url, verify=self.verify_cert,
-                                 auth=(self.api_key, self.api_secret))
-        return self._process_response(response)
-
-    def _post(self, url, body):
-        req_url = self.base_url + '/' + url
+    def _post(self, endpoint, body):
+        req_url = '{}/{}'.format(self.base_url, endpoint)
         response = requests.post(req_url, data=body, verify=self.verify_cert,
-                                 auth=(self.api_key, self.api_secret))
-        return self._process_response(response)
-
-    def _put(self, url, body):
-        req_url = self.base_url + '/' + url
-        response = requests.put(req_url, data=body, verify=self.verify_cert,
-                                auth=(self.api_key, self.api_secret))
-        return self._process_response(response)
-
-    def _delete(self, url):
-        req_url = self.base_url + '/' + url
-        response = requests.delete(req_url, verify=self.verify_cert,
-                                   auth=(self.api_key, self.api_secret))
-        return self._process_response(response)
-
-    def _patch(self, url, body):
-        req_url = self.base_url + '/' + url
-        response = requests.patch(req_url, data=body, verify=self.verify_cert,
-                                  auth=(self.api_key, self.api_secret))
+                                 auth=(self.api_key, self.api_secret),
+                                 timeout=DEFAULT_TIMEOUT)
         return self._process_response(response)
