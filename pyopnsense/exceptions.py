@@ -17,8 +17,10 @@
 
 
 class APIException(Exception):
+    """Representation of the API exception."""
 
     def __init__(self, status_code=None, resp_body=None, *args, **kwargs):
+        """Initialize the API exception."""
         self.resp_body = resp_body
         self.status_code = status_code
         message = kwargs.get('message', resp_body)
