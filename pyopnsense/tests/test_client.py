@@ -36,8 +36,8 @@ class TestOPNClient(base.TestCase):
         opnclient = client.OPNClient('', '', '')
         resp = opnclient._get('fake_url')
         self.assertEqual({'a': 'body'}, resp)
-        request_mock.assert_called_once_with('/fake_url', auth=('', ''),
-                                             verify=False)
+        request_mock.assert_called_once_with(
+            '/fake_url', auth=('', ''), timeout=5, verify=False)
 
     @mock.patch('requests.get')
     def test_get_failures(self, request_mock):
@@ -47,8 +47,8 @@ class TestOPNClient(base.TestCase):
         request_mock.return_value = response_mock
         opnclient = client.OPNClient('', '', '')
         self.assertRaises(exceptions.APIException, opnclient._get, 'fake_url')
-        request_mock.assert_called_once_with('/fake_url', auth=('', ''),
-                                             verify=False)
+        request_mock.assert_called_once_with(
+            '/fake_url', auth=('', ''), timeout=5, verify=False)
 
     @mock.patch('requests.post')
     def test_post_success(self, request_mock):
@@ -59,8 +59,8 @@ class TestOPNClient(base.TestCase):
         opnclient = client.OPNClient('', '', '')
         resp = opnclient._post('fake_url', 'body')
         self.assertEqual({'a': 'body'}, resp)
-        request_mock.assert_called_once_with('/fake_url', data='body',
-                                             auth=('', ''), verify=False)
+        request_mock.assert_called_once_with(
+            '/fake_url', data='body', auth=('', ''), timeout=5, verify=False)
 
     @mock.patch('requests.post')
     def test_post_failures(self, request_mock):
@@ -69,7 +69,7 @@ class TestOPNClient(base.TestCase):
         response_mock.text = json.dumps({'a': 'body'})
         request_mock.return_value = response_mock
         opnclient = client.OPNClient('', '', '')
-        self.assertRaises(exceptions.APIException, opnclient._post, 'fake_url',
-                          'body')
-        request_mock.assert_called_once_with('/fake_url', data='body',
-                                             auth=('', ''), verify=False)
+        self.assertRaises(
+            exceptions.APIException, opnclient._post, 'fake_url', 'body')
+        request_mock.assert_called_once_with(
+            '/fake_url', data='body', auth=('', ''), timeout=5, verify=False)
