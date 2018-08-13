@@ -42,8 +42,8 @@ to a client class. For example:
 
     from pyopnsense import diagnostics
 
-    api_key = XXXXXX
-    api_secret = XXXXXXXXXXXXXXX
+    api_key = 'XXXXXX'
+    api_secret = 'XXXXXXXXXXXXXXX'
     opnsense_url = 'http://192.168.1.1/api'
 
     netinsight_client = diagnostics.NetworkInsightClient(
