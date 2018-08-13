@@ -27,14 +27,17 @@ HTTP_SUCCESS = (200, 201, 202, 203, 204, 205, 206, 207)
 
 
 class OPNClient(object):
+    """Representation of the OPNsense API client."""
 
     def __init__(self, api_key, api_secret, base_url, verify_cert=False):
+        """Initialize the OPNsense API client."""
         self.api_key = api_key
         self.api_secret = api_secret
         self.base_url = base_url
         self.verify_cert = verify_cert
 
     def _process_response(self, response):
+        """Handle the response."""
         if response.status_code in HTTP_SUCCESS:
             return json.loads(response.text)
         else:
@@ -42,36 +45,42 @@ class OPNClient(object):
                                           resp_body=response.text)
 
     def _get(self, url):
+        """Perform a HTTP GET request."""
         req_url = self.base_url + '/' + url
         response = requests.get(req_url, verify=self.verify_cert,
                                 auth=(self.api_key, self.api_secret))
         return self._process_response(response)
 
     def _head(self, url):
+        """Perform a HTTP HEAD request."""
         req_url = self.base_url + '/' + url
         response = requests.head(req_url, verify=self.verify_cert,
                                  auth=(self.api_key, self.api_secret))
         return self._process_response(response)
 
     def _post(self, url, body):
+        """Perform a HTTP POST request."""
         req_url = self.base_url + '/' + url
         response = requests.post(req_url, data=body, verify=self.verify_cert,
                                  auth=(self.api_key, self.api_secret))
         return self._process_response(response)
 
     def _put(self, url, body):
+        """Perform a HTTP PUT request."""
         req_url = self.base_url + '/' + url
         response = requests.put(req_url, data=body, verify=self.verify_cert,
                                 auth=(self.api_key, self.api_secret))
         return self._process_response(response)
 
     def _delete(self, url):
+        """Perform a HTTP DELETE request."""
         req_url = self.base_url + '/' + url
         response = requests.delete(req_url, verify=self.verify_cert,
                                    auth=(self.api_key, self.api_secret))
         return self._process_response(response)
 
     def _patch(self, url, body):
+        """Perform a HTTP PATCH request."""
         req_url = self.base_url + '/' + url
         response = requests.patch(req_url, data=body, verify=self.verify_cert,
                                   auth=(self.api_key, self.api_secret))

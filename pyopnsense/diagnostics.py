@@ -21,14 +21,14 @@ from pyopnsense import client
 
 
 class NetFlowClient(client.OPNClient):
-    """A client for interacting with the diagnostics/netflow endpoint
+    """A client for interacting with the diagnostics/netflow endpoint.
 
-    :param str api_key: The api key to use for requests
-    :param str api_secret: The api secret to use for requests
-    :param str base_url: THe base api endpoint for the OPNsense deployment
+    :param str api_key: The API key to use for requests
+    :param str api_secret: The API secret to use for requests
+    :param str base_url: The base API endpoint for the OPNsense deployment
     """
     def status(self):
-        """Return the current netflow status
+        """Return the current netflow status.
 
         :returns: A dict representing the current status of netflow
         :rtype: dict
@@ -39,51 +39,57 @@ class NetFlowClient(client.OPNClient):
 class InterfaceClient(client.OPNClient):
     """A client for interacting with the diagnostics/interface endpoint
 
-    :param str api_key: The api key to use for requests
-    :param str api_secret: The api secret to use for requests
-    :param str base_url: THe base api endpoint for the OPNsense deployment
+    :param str api_key: The API key to use for requests
+    :param str api_secret: The API secret to use for requests
+    :param str base_url: The base API endpoint for the OPNsense deployment
     """
     def get_ndp(self):
-        """Get NDP table for router"""
+        """Get NDP table for router."""
         return self._get('diagnostics/interface/getNdp')
 
     def get_arp(self):
-        """Get ARP table for router"""
+        """Get ARP table for router."""
         return self._get('diagnostics/interface/getArp')
 
 
 class NetworkInsightClient(client.OPNClient):
-    """A client for interacting with the diagnostics/networkinsight endpoint
+    """A client for interacting with the diagnostics/networkinsight endpoint.
 
-    :param str api_key: The api key to use for requests
-    :param str api_secret: The api secret to use for requests
-    :param str base_url: THe base api endpoint for the OPNsense deployment
+    :param str api_key: The API key to use for requests
+    :param str api_secret: The API secret to use for requests
+    :param str base_url: The base API endpoint for the OPNsense deployment
     """
     def get_interfaces(self):
+        """Return the available interfaces."""
         return self._get('diagnostics/networkinsight/getinterfaces')
 
     def get_services(self):
+        """Return the available services."""
         return self._get('diagnostics/networkinsight/getservices')
 
     def get_protocols(self):
+        """Return the protocols."""
         return self._get('diagnostics/networkinsight/getprotocols')
 
     def get_timeserie(self):
+        """Return the time serie."""
         return self._get('diagnostics/networkinsight/timeserie')
 
 
 class SystemHealthClient(client.OPNClient):
-    """A client for interacting with the diagnostics/systemhealth endpoint
+    """A client for interacting with the diagnostics/systemhealth endpoint.
 
-    :param str api_key: The api key to use for requests
-    :param str api_secret: The api secret to use for requests
-    :param str base_url: THe base api endpoint for the OPNsense deployment
+    :param str api_key: The API key to use for requests
+    :param str api_secret: The API secret to use for requests
+    :param str base_url: The base API endpoint for the OPNsense deployment
     """
     def get_health_list(self):
+        """Return the health list."""
         return self._get('diagnostics/systemhealth/getRRDlist')
 
     def get_health_data(self, metric, start=0, stop=0, maxitems=1024,
                         inverse=False, details=False):
+        """Return the health data."""
         url = ['diagnostics/systemhealth/getSystemHealth']
         url.append(urllib.parse.quote(metric))
         url.append(start)
