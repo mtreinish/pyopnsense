@@ -36,16 +36,19 @@ https://docs.opnsense.org/development/how-tos/api.html
 
 Once you have the API key and API secret you can use pyopnsense to interact
 with your OPNsense installation. You can do this by passing your credentials
-to a client class. For example::
+to a client class. For example:
+
+.. code-block:: python
 
     from pyopnsense import diagnostics
 
-    api_key = XXXXXX
-    api_secret = XXXXXXXXXXXXXXX
-    opnsense_url = http://192.168.1.1/api'
+    api_key = 'XXXXXX'
+    api_secret = 'XXXXXXXXXXXXXXX'
+    opnsense_url = 'http://192.168.1.1/api'
 
-    netinsight_client = diagnostics.NetworkInsightClient(api_key, api_secret,
-                                                         base_url)
+    netinsight_client = diagnostics.NetworkInsightClient(
+        api_key, api_secret, opnsense_url)
+
     print(netinsight_client.get_interfaces())
 
 which will print a dictionary mapping physical devices to their interface label.
