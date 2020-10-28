@@ -48,3 +48,9 @@ Diagnostics API
 .. automodule:: pyopnsense.diagnostics
     :members:
     :show-inheritance:
+
+Routes API
+---------------
+.. automodule:: pyopnsense.routes
+    :members:
+    :show-inheritance:
