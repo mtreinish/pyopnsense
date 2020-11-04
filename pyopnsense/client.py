@@ -19,6 +19,7 @@
 import json
 
 import requests
+import requests_cache
 
 from pyopnsense import exceptions
 
@@ -31,12 +32,22 @@ HTTP_SUCCESS = (200, 201, 202, 203, 204, 205, 206, 207)
 class OPNClient(object):
     """Representation of the OPNsense API client."""
 
-    def __init__(self, api_key, api_secret, base_url, verify_cert=False):
+    def __init__(
+        self,
+        api_key,
+        api_secret,
+        base_url,
+        cache=False,
+        verify_cert=False,
+    ):
         """Initialize the OPNsense API client."""
         self.api_key = api_key
         self.api_secret = api_secret
         self.base_url = base_url
         self.verify_cert = verify_cert
+
+        if cache:
+            requests_cache.install_cache(backend='memory', expire_after=cache)
 
     def _process_response(self, response):
         """Handle the response."""
