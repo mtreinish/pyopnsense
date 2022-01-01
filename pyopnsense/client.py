@@ -38,24 +38,24 @@ class OPNClient(object):
         self.base_url = base_url
         self.verify_cert = verify_cert
 
-    def _process_response(self, response):
+    def _process_response(self, response, raw=False):
         """Handle the response."""
         if response.status_code in HTTP_SUCCESS:
-            return json.loads(response.text)
+            return response.text if raw else json.loads(response.text)
         else:
             raise exceptions.APIException(
                 status_code=response.status_code, resp_body=response.text)
 
-    def _get(self, endpoint):
+    def _get(self, endpoint, raw=False):
         req_url = '{}/{}'.format(self.base_url, endpoint)
         response = requests.get(req_url, verify=self.verify_cert,
                                 auth=(self.api_key, self.api_secret),
                                 timeout=DEFAULT_TIMEOUT)
-        return self._process_response(response)
+        return self._process_response(response, raw)
 
-    def _post(self, endpoint, body):
+    def _post(self, endpoint, body, raw=False):
         req_url = '{}/{}'.format(self.base_url, endpoint)
         response = requests.post(req_url, data=body, verify=self.verify_cert,
                                  auth=(self.api_key, self.api_secret),
                                  timeout=DEFAULT_TIMEOUT)
-        return self._process_response(response)
+        return self._process_response(response, raw)
