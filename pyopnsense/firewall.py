@@ -27,7 +27,7 @@ class FirewallClient(client.OPNClient):
         :rtype: dict
         """
 
-        return self._get(f"firewall/filter/getRule/{uuid}")
+        return self._get("firewall/filter/getRule/%s" % uuid)
 
     def toggle_rule(self, uuid):
         """
@@ -36,11 +36,11 @@ class FirewallClient(client.OPNClient):
         :returns: A dict representing the new status of the rule
         :rtype: dict
         """
-        return self._post(f"firewall/filter/toggleRule/{uuid}", "")
+        return self._post("firewall/filter/toggleRule/%s", "" % uuid)
 
     def apply_rules(self):
         """
         Function to apply changes to rules.
 
         """
-        self._post(f"firewall/filter/apply/", "")
+        self._post("firewall/filter/apply/", "")
