@@ -28,9 +28,9 @@ class BackupClient(client.OPNClient):
     """
 
     def download(self):
-        """Downloads the backup file.
+        """Downloads the configuration file.
 
-        :returns: A dict representing the current status of gateways
-        :rtype: dict
+        :returns: Returns the OPNsense configuration as XML string.
+        :rtype: str
         """
         return self._get('backup/backup/download', True)
