@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with pyopnsense. If not, see <http://www.gnu.org/licenses/>.
 
-from six.moves import urllib
+import urllib
 
 from pyopnsense import client
 
