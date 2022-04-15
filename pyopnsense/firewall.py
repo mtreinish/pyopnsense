@@ -1,4 +1,4 @@
-# Copyright 2018 Matthew Treinish
+# Copyright 2022 Patrick Carr
 #
 # This file is part of pyopnsense
 #
