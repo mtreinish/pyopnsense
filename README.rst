@@ -45,9 +45,10 @@ to a client class. For example:
     api_key = 'XXXXXX'
     api_secret = 'XXXXXXXXXXXXXXX'
     opnsense_url = 'http://192.168.1.1/api'
+    timeout = 5
 
     netinsight_client = diagnostics.NetworkInsightClient(
-        api_key, api_secret, opnsense_url)
+        api_key, api_secret, opnsense_url, timeout)
 
     print(netinsight_client.get_interfaces())
 
