@@ -37,7 +37,8 @@ class FirewallClient(client.OPNClient):
 
     def get_rule_status(self, uuid):
         """
-        Return the current status (enabled/disabled) of a specific firewall rule
+        Return the current status (enabled/disabled) of a specific firewall
+        rule
 
         Parameter:  uuid
 
