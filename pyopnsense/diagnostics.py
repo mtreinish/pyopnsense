@@ -42,6 +42,7 @@ class InterfaceClient(client.OPNClient):
     :param str api_key: The API key to use for requests
     :param str api_secret: The API secret to use for requests
     :param str base_url: The base API endpoint for the OPNsense deployment
+    :param int timeout: The timeout in seconds for API requests
     """
     def get_ndp(self):
         """Get NDP table for router."""
@@ -58,6 +59,7 @@ class NetworkInsightClient(client.OPNClient):
     :param str api_key: The API key to use for requests
     :param str api_secret: The API secret to use for requests
     :param str base_url: The base API endpoint for the OPNsense deployment
+    :param int timeout: The timeout in seconds for API requests
     """
     def get_interfaces(self):
         """Return the available interfaces."""
@@ -82,6 +84,7 @@ class SystemHealthClient(client.OPNClient):
     :param str api_key: The API key to use for requests
     :param str api_secret: The API secret to use for requests
     :param str base_url: The base API endpoint for the OPNsense deployment
+    :param int timeout: The timeout in seconds for API requests
     """
     def get_health_list(self):
         """Return the health list."""
