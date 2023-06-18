@@ -31,8 +31,9 @@ HTTP_SUCCESS = (200, 201, 202, 203, 204, 205, 206, 207)
 class OPNClient(object):
     """Representation of the OPNsense API client."""
 
-    def __init__(self, api_key, api_secret, base_url, verify_cert=False,
-                 timeout=DEFAULT_TIMEOUT):
+    def __init__(
+        self, api_key, api_secret, base_url, verify_cert=False, timeout=DEFAULT_TIMEOUT
+    ):
         """Initialize the OPNsense API client."""
         self.api_key = api_key
         self.api_secret = api_secret
@@ -46,18 +47,26 @@ class OPNClient(object):
             return response.text if raw else json.loads(response.text)
         else:
             raise exceptions.APIException(
-                status_code=response.status_code, resp_body=response.text)
+                status_code=response.status_code, resp_body=response.text
+            )
 
     def _get(self, endpoint, raw=False):
-        req_url = '{}/{}'.format(self.base_url, endpoint)
-        response = requests.get(req_url, verify=self.verify_cert,
-                                auth=(self.api_key, self.api_secret),
-                                timeout=self.timeout)
+        req_url = "{}/{}".format(self.base_url, endpoint)
+        response = requests.get(
+            req_url,
+            verify=self.verify_cert,
+            auth=(self.api_key, self.api_secret),
+            timeout=self.timeout,
+        )
         return self._process_response(response, raw)
 
     def _post(self, endpoint, body, raw=False):
-        req_url = '{}/{}'.format(self.base_url, endpoint)
-        response = requests.post(req_url, data=body, verify=self.verify_cert,
-                                 auth=(self.api_key, self.api_secret),
-                                 timeout=self.timeout)
+        req_url = "{}/{}".format(self.base_url, endpoint)
+        response = requests.post(
+            req_url,
+            data=body,
+            verify=self.verify_cert,
+            auth=(self.api_key, self.api_secret),
+            timeout=self.timeout,
+        )
         return self._process_response(response, raw)

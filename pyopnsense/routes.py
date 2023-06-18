@@ -33,4 +33,4 @@ class GatewayClient(client.OPNClient):
         :returns: A dict representing the current status of gateways
         :rtype: dict
         """
-        return self._get('routes/gateway/status')
+        return self._get("routes/gateway/status")
