@@ -33,7 +33,7 @@ class TestOPNClient(base.TestCase):
         response_mock.status_code = 200
         response_mock.text = json.dumps({'a': 'body'})
         request_mock.return_value = response_mock
-        opnclient = client.OPNClient('', '', '', 10)
+        opnclient = client.OPNClient('', '', '', timeout=10)
         resp = opnclient._get('fake_url')
         self.assertEqual({'a': 'body'}, resp)
         request_mock.assert_called_once_with(
