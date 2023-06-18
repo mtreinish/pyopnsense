@@ -36,7 +36,7 @@ class FirmwareClient(client.OPNClient):
                   OPNsense firmware.
         :rtype: dict
         """
-        return self._get('core/firmware/status')
+        return self._get("core/firmware/status")
 
     def upgrade(self, upgrade_list=None):
         """Issue an upgrade request.
@@ -45,6 +45,6 @@ class FirmwareClient(client.OPNClient):
             specified it will issue a request to upgrade all packages.
         """
         if upgrade_list is None:
-            upgrade_list = 'all'
-        body = json.dumps({'upgrade': upgrade_list})
-        return self._post('core/firmware/upgrade', body)
+            upgrade_list = "all"
+        body = json.dumps({"upgrade": upgrade_list})
+        return self._post("core/firmware/upgrade", body)

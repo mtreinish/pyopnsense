@@ -2,8 +2,9 @@
 # of appearance. Changing the order has an impact on the overall integration
 # process, which may cause wedges in the gate later.
 
-hacking>=0.11.0,<0.12 # Apache-2.0
+hacking~=6.0
 stestr>=1.1.0 # Apache-2.0
 coverage>=3.6 # Apache-2.0
 sphinx>1.6
 mock>=2.0.0 # BSD
+black~=23.0

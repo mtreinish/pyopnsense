@@ -23,5 +23,5 @@ class APIException(Exception):
         """Initialize the API exception."""
         self.resp_body = resp_body
         self.status_code = status_code
-        message = kwargs.get('message', resp_body)
+        message = kwargs.get("message", resp_body)
         super(APIException, self).__init__(message, *args, **kwargs)

@@ -22,6 +22,7 @@ class BackupClient(client.OPNClient):
     """A client for interacting with the backup endpoint. To use it, make
     sure the os-api-backup plugin is installed.
 
+
     :param str api_key: The API key to use for requests
     :param str api_secret: The API secret to use for requests
     :param str base_url: The base API endpoint for the OPNsense deployment
@@ -34,4 +35,4 @@ class BackupClient(client.OPNClient):
         :returns: Returns the OPNsense configuration as XML string.
         :rtype: str
         """
-        return self._get('backup/backup/download', True)
+        return self._get("backup/backup/download", True)
