@@ -48,7 +48,7 @@ to a client class. For example:
     timeout = 5
 
     netinsight_client = diagnostics.NetworkInsightClient(
-        api_key, api_secret, opnsense_url, timeout)
+        api_key, api_secret, opnsense_url, timeout=timeout)
 
     print(netinsight_client.get_interfaces())
 
