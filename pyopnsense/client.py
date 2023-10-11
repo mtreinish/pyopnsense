@@ -21,6 +21,7 @@ import json
 import requests
 
 from pyopnsense import exceptions
+from requests.packages import urllib3
 
 DEFAULT_TIMEOUT = 5
 
@@ -39,6 +40,8 @@ class OPNClient(object):
         self.api_secret = api_secret
         self.base_url = base_url
         self.verify_cert = verify_cert
+        if self.verify_cert == False:
+          urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
         self.timeout = timeout
 
     def _process_response(self, response, raw=False):
